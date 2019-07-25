@@ -1,23 +1,27 @@
 {
   "development": {
-    "username": "root",
-    "password": "mysql",
-    "database": "rest_users",
-    "host": "127.0.0.1",
+    "username": "uEBbQwue5K",
+    "password": "e6nhtoSRMe",
+    "database": "uEBbQwue5K",
+    "host": "remotemysql.com",
+    "port":"3306",
     "dialect": "mysql"
   },
+  
   "test": {
-    "username": "root",
-    "password": "mysql",
-    "database": "rest_users",
-    "host": "127.0.0.1",
+    "username": "uEBbQwue5K",
+    "password": "e6nhtoSRMe",
+    "database": "uEBbQwue5K",
+    "host": "remotemysql.com",
+    "port":"3306",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "mysql",
-    "database": "rest_users",
-    "host": "127.0.0.1",
+    "username": "uEBbQwue5K",
+    "password": "e6nhtoSRMe",
+    "database": "uEBbQwue5K",
+    "host": "remotemysql.com",
+    "port":"3306",
     "dialect": "mysql"
   }
 }

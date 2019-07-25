@@ -5,18 +5,22 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+var ridesRouter = require('./routes/rides');
 var usersRouter = require('./routes/users');
-
+var cors = require('cors');
 var app = express();
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/rides', ridesRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
@@ -34,8 +38,6 @@ app.use(function(req,res,next){
   next();
 });
 
-app.listen(3300,function(){
-  console.info('server at port 3300');
-});
+app.listen(process.env.PORT || 3300);
 
 module.exports = app;

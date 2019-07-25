@@ -10,8 +10,6 @@ model.User.findAll({}).then(users => res.json({
     error:true,
     data:[],
     error:error }));
-
-
 });
 
 router.post('/',bodyParser,function(req,res,next){
@@ -41,6 +39,26 @@ console.log('re'+req.body.name);
    });
 
 
+
+   router.get('/Drivers',bodyParser,async function(req,res,next){
+       
+ try{
+  const drivers = await model.User.findOne({
+    
+    where:{
+      driver:"1",
+    }});
+  
+  return res.send({
+    drivers,
+  });
+
+}catch(error){
+  console.log(error.message);
+}
+      });
+
+
 router.put('/:id', function(req, res, next) {
   const user_id = req.params.id;
   const {name,cpf,date_of_birth} = req.body;
@@ -61,8 +79,7 @@ router.put('/:id', function(req, res, next) {
 });
     
 
-
-router.put('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
   const user_id = req.params.id;
   const {name,cpf,date_of_birth} = req.body;
   model.User.destroy({where: {
@@ -80,6 +97,46 @@ router.put('/:id', function(req, res, next) {
 });
     
 
+
+router.put('/isPassenger/:id', function(req, res, next) {
+  const user_id = req.params.id;
+  const {passenger,lng,lat} = req.body;
+  model.User.update({
+    passenger: passenger,lng:lng,lat:lat, driver:"0"},
+    {where: {
+      id:user_id
+    }
+  }).
+  then(user => res.status(201).json({
+    error:false,
+    message:"user is passenger"
+  }))
+  .catch(error => res.json({
+    error:true,
+    error:error
+  }));
+});
+
+
+
+router.put('/isDriver/:id', function(req, res, next) {
+  const user_id = req.params.id;
+  const {driver,lng,lat} = req.body;
+  model.User.update({
+    driver: driver,lng:lng,lat:lat,passenger:"0"},
+    {where: {
+      id:user_id
+    }
+  }).
+  then(user => res.status(201).json({
+    error:false,
+    message:"user is driver"
+  }))
+  .catch(error => res.json({
+    error:true,
+    error:error
+  }));
+});
 
 
 module.exports = router;
