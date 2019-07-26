@@ -16,6 +16,7 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+const server = require('http').Server(app);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
@@ -38,6 +39,8 @@ app.use(function(req,res,next){
   next();
 });
 
-app.listen(process.env.PORT || 3300);
+server.listen((process.env.PORT || 3200), function(){
+  console.log('listening on *:3200');
+});
 
 module.exports = app;
