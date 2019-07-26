@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var model = require('../models/index');
 var bodyParser = require('body-parser').json();
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   //res.send('respond with a resource');
@@ -41,21 +42,21 @@ console.log('re'+req.body.name);
 
 
    router.get('/Drivers',bodyParser,async function(req,res,next){
-       
- try{
-  const drivers = await model.User.findOne({
-    
-    where:{
-      driver:"1",
-    }});
-  
-  return res.send({
-    drivers,
-  });
+     
+    const {lat,lng} = req.body;
 
+try{
+const locateDrivers = await model.sequelize.query (
+  "SELECT *, (6371 * acos(cos(radians(-19.83996)) * cos(radians(lat)) * cos(radians(-43.94910) - radians(lng)) + sin(radians(-19.83996)) * sin(radians(lat)) )) AS distance FROM Users HAVING distance <= 100; ",{ type: model.sequelize.QueryTypes.SELECT }, 
+  ) .then(drivers => {
+    return res.send({
+      drivers
+    });
+  });
 }catch(error){
   console.log(error.message);
 }
+
       });
 
 
