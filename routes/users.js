@@ -40,6 +40,25 @@ console.log('re'+req.body.name);
    });
 
 
+   router.post('/login',bodyParser,function(req,res,next){
+ 
+    const{ 
+      name,
+     } = req.body;
+   
+     try{
+      const login = await model.sequelize.query (
+        "SELECT * from Users where Users.name like "+name,{ type: model.sequelize.QueryTypes.SELECT }, 
+        ) .then(user => {
+          return res.send({
+            user
+          });
+        });
+      }catch(error){
+        console.log(error.message);
+      }
+      });
+
 
    router.get('/Drivers',bodyParser,async function(req,res,next){
      
@@ -47,7 +66,7 @@ console.log('re'+req.body.name);
 
 try{
 const locateDrivers = await model.sequelize.query (
-  "SELECT *, (6371 * acos(cos(radians(-19.83996)) * cos(radians(lat)) * cos(radians(-43.94910) - radians(lng)) + sin(radians(-19.83996)) * sin(radians(lat)) )) AS distance FROM Users HAVING distance <= 100; ",{ type: model.sequelize.QueryTypes.SELECT }, 
+  "SELECT *, (6371 * acos(cos(radians("+lat+")) * cos(radians(lat)) * cos(radians("+lng+") - radians(lng)) + sin(radians("+lat+")) * sin(radians(lat)) )) AS distance FROM Users HAVING distance <= 5; ",{ type: model.sequelize.QueryTypes.SELECT }, 
   ) .then(drivers => {
     return res.send({
       drivers
