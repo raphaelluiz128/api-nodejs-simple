@@ -48,7 +48,7 @@ console.log('re'+req.body.name);
    
      try{
       const login = await model.sequelize.query (
-        "SELECT * from Users where Users.name like "+name,{ type: model.sequelize.QueryTypes.SELECT }, 
+        "SELECT * from Users where Users.name like "+"'"+ name+"'",{ type: model.sequelize.QueryTypes.SELECT }, 
         ) .then(user => {
           return res.send({
             user
