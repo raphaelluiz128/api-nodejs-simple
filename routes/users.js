@@ -40,7 +40,7 @@ console.log('re'+req.body.name);
    });
 
 
-   router.post('/login',bodyParser,function(req,res,next){
+   router.post('/login',bodyParser, async function(req,res,next){
  
     const{ 
       name,
