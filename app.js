@@ -39,8 +39,9 @@ app.use(function(req,res,next){
   next();
 });
 
+/*
 server.listen((process.env.PORT || 3200), function(){
   console.log('listening on *:3200');
 });
-
+*/
 module.exports = app;

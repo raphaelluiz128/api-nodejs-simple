@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "myapp-executor",
+    "name": "myapp",
+    "region": "eu-central-1"
+  },
+  "api": {
+    "id": "zxkytqsms9"
+  }
+}
