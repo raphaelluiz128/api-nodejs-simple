@@ -1,10 +1,10 @@
 {
   "lambda": {
-    "role": "myapp-executor",
-    "name": "myapp",
-    "region": "eu-central-1"
+    "role": "api-carona-executor",
+    "name": "api-carona",
+    "region": "sa-east-1"
   },
   "api": {
-    "id": "zxkytqsms9"
+    "id": "jh50xvis5j"
   }
 }

@@ -60,13 +60,16 @@ console.log('re'+req.body.name);
       });
 
 
-   router.get('/Drivers',bodyParser,async function(req,res,next){
+   router.post('/drivers',bodyParser,async function(req,res,next){
      
-    const {lat,lng} = req.body;
+    
+    
 
 try{
+  const {lat,lng} = req.body;
+  console.log(req);
 const locateDrivers = await model.sequelize.query (
-  "SELECT *, (6371 * acos(cos(radians("+lat+")) * cos(radians(lat)) * cos(radians("+lng+") - radians(lng)) + sin(radians("+lat+")) * sin(radians(lat)) )) AS distance FROM Users HAVING distance <= 5; ",{ type: model.sequelize.QueryTypes.SELECT }, 
+  "SELECT *, (6371 * acos(cos(radians("+lat+")) * cos(radians(lat)) * cos(radians("+lng+") - radians(lng)) + sin(radians("+lat+")) * sin(radians(lat)) )) AS distance FROM Users HAVING distance <= 5; ", 
   ) .then(drivers => {
     return res.send({
       drivers
